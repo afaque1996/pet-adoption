@@ -1,12 +1,48 @@
+- .env
+- .expo
+  - devices.json
+  - README.md
 - .gitignore
-- app.json
+- app
+  - adoption
+    - add.tsx
+    - details.tsx
+    - list.tsx
+    - search.tsx
+  - auth
+    - login.tsx
+  - home
+    - index.tsx
+  - index.tsx
+  - profile
+    - index.tsx
+  - _layout.tsx
+- app.config.js
 - App.tsx
 - assets
   - adaptive-icon.png
   - favicon.png
+  - fonts
+    - SpaceMono-Regular.ttf
   - icon.png
+  - images
   - splash-icon.png
-- index.ts
+- components
+  - Button.tsx
+  - Card.tsx
+  - ThemedText.tsx
+  - ThemedView.tsx
+- constants
+  - Colors.ts
+  - Config.ts
+- hooks
+  - useAuth.ts
+  - useColorScheme.ts
 - package-lock.json
 - package.json
+- project_structure.text
+- services
+  - addPet.ts
+  - uploadImage.ts
+- supabaseConfig.ts
 - tsconfig.json

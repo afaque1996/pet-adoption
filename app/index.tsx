@@ -7,12 +7,12 @@ export default function IndexRedirect() {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        setMounted(true); // Ensures the layout is mounted before navigation
+        setMounted(true);
     }, []);
 
     useEffect(() => {
         if (mounted) {
-            router.replace("/home"); // Redirect only after mount
+            router.replace("/home");
         }
     }, [mounted]);
 
