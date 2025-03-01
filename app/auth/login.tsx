@@ -5,13 +5,35 @@ import { useRouter } from "expo-router";
 
 export default function LoginScreen() {
     const router = useRouter();
-    const [method, setMethod] = useState<"email" | "phone">("email"); // Toggle login method
+    const [method, setMethod] = useState<"email" | "phone">("email");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [confirmOtp, setConfirmOtp] = useState(false);
+
+    // Helper function to create a default profile record on signup
+    const createProfileOnSignup = async (userId: string) => {
+        const defaultProfile = {
+            id: userId,           // Use the same id as in auth.users
+            name: "",
+            bio: "",
+            avatar_url: "",
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+        };
+
+        const { data, error } = await supabase
+            .from("profiles")
+            .insert(defaultProfile);
+
+        if (error) {
+            console.error("Error creating profile:", error);
+        } else {
+            console.log("Profile created:", data);
+        }
+    };
 
     // 🔹 Handle Email Login
     const signInWithEmail = async () => {
@@ -23,14 +45,22 @@ export default function LoginScreen() {
         else router.replace("/"); // Redirect to Home
     };
 
-    // 🔹 Handle Email SignUp
+    // 🔹 Handle Email SignUp with automatic profile creation
     const signUpWithEmail = async () => {
         setLoading(true);
-        const { error } = await supabase.auth.signUp({ email, password });
-        setLoading(false);
-
-        if (error) Alert.alert("Signup Failed", error.message);
-        else Alert.alert("Check your email", "A confirmation email has been sent!");
+        const { data, error } = await supabase.auth.signUp({ email, password });
+        if (error) {
+            setLoading(false);
+            Alert.alert("Signup Failed", error.message);
+        } else {
+            // If a user record was created, create a default profile row
+            if (data.user) {
+                console.log("User signed up, creating profile for user:", data.user.id);
+                await createProfileOnSignup(data.user.id);
+            }
+            setLoading(false);
+            Alert.alert("Check your email", "A confirmation email has been sent!");
+        }
     };
 
     // 🔹 Handle Phone OTP Request

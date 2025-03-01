@@ -4,6 +4,13 @@
   - README.md
 - .gitignore
 - app
+  - (tabs)
+    - explore.tsx
+    - home.tsx
+    - profile.tsx
+    - search.tsx
+    - setting.tsx
+    - _layout.tsx
   - adoption
     - add.tsx
     - details.tsx
@@ -11,10 +18,19 @@
     - search.tsx
   - auth
     - login.tsx
+  - favorites
+    - index.tsx
   - home
     - index.tsx
   - index.tsx
+  - messages
+    - conversation.tsx
+    - index.tsx
+  - notifications
+    - index.tsx
   - profile
+    - index.tsx
+  - settings
     - index.tsx
   - _layout.tsx
 - app.config.js
@@ -30,6 +46,7 @@
 - components
   - Button.tsx
   - Card.tsx
+  - FavoriteButton.tsx
   - ThemedText.tsx
   - ThemedView.tsx
 - constants
@@ -43,6 +60,7 @@
 - project_structure.text
 - services
   - addPet.ts
+  - favorites.ts
   - uploadImage.ts
 - supabaseConfig.ts
 - tsconfig.json

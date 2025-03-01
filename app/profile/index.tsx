@@ -11,7 +11,7 @@ import {
 import { useAuth } from "../../hooks/useAuth";
 import { useRouter } from "expo-router";
 import { supabase } from "../../supabaseConfig";
-import { Feather } from "@expo/vector-icons"; // For icons
+import { Feather } from "@expo/vector-icons";
 
 const ProfileScreen = () => {
     const { user, loading } = useAuth();
@@ -57,7 +57,7 @@ const ProfileScreen = () => {
                     source={
                         user.avatar
                             ? { uri: user.avatar }
-                            : require("../../assets/icon.png") // Replace with your default image
+                            : require("../../assets/icon.png")
                     }
                 />
                 <Text style={styles.profileName}>
@@ -66,8 +66,15 @@ const ProfileScreen = () => {
                 <Text style={styles.profileEmail}>{user.email}</Text>
             </View>
 
-            {/* Menu */}
+            {/* Options Menu */}
             <View style={styles.menu}>
+                <TouchableOpacity
+                    style={styles.menuItem}
+                    onPress={() => router.push("/profile/edit")}
+                >
+                    <Feather name="edit" size={24} color="#fff" />
+                    <Text style={styles.menuItemText}>Edit Profile</Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.menuItem}
                     onPress={() => router.push("/favorites")}
@@ -77,10 +84,38 @@ const ProfileScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.menuItem}
-                    onPress={() => router.push("/settings")}
+                    onPress={() => router.push("/profile/adoptions")}
                 >
-                    <Feather name="settings" size={24} color="#333" />
-                    <Text style={styles.menuItemText}>Settings</Text>
+                    <Feather name="home" size={24} color="#fff" />
+                    <Text style={styles.menuItemText}>My Adoptions</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.menuItem}
+                    onPress={() => router.push("/profile/activity")}
+                >
+                    <Feather name="activity" size={24} color="#fff" />
+                    <Text style={styles.menuItemText}>My Posts/Activity</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.menuItem}
+                    onPress={() => router.push("/profile/notifications")}
+                >
+                    <Feather name="bell" size={24} color="#fff" />
+                    <Text style={styles.menuItemText}>Notifications</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.menuItem}
+                    onPress={() => router.push("/settings/account")}
+                >
+                    <Feather name="settings" size={24} color="#fff" />
+                    <Text style={styles.menuItemText}>Account Settings</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.menuItem}
+                    onPress={() => console.log("Invite Friends")}
+                >
+                    <Feather name="users" size={24} color="#fff" />
+                    <Text style={styles.menuItemText}>Invite Friends</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.menuItem, styles.logoutButton]}
@@ -101,18 +136,18 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "#000", // Dark background
     },
     header: {
         padding: 20,
         borderBottomWidth: 1,
-        borderBottomColor: "#eee",
-        backgroundColor: "#fff",
+        borderBottomColor: "#333",
+        backgroundColor: "#222",
     },
     headerTitle: {
         fontSize: 24,
         fontWeight: "bold",
-        color: "#333",
+        color: "#fff",
         textAlign: "center",
     },
     emptyContainer: {
@@ -128,11 +163,11 @@ const styles = StyleSheet.create({
     profileHeader: {
         alignItems: "center",
         padding: 20,
-        backgroundColor: "#fff",
+        backgroundColor: "#222",
         margin: 20,
         borderRadius: 12,
         shadowColor: "#000",
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.5,
         shadowRadius: 6,
         shadowOffset: { width: 0, height: 2 },
         elevation: 4,
@@ -142,23 +177,23 @@ const styles = StyleSheet.create({
         height: 120,
         borderRadius: 60,
         marginBottom: 15,
-        backgroundColor: "#ddd",
+        backgroundColor: "#444",
     },
     profileName: {
         fontSize: 22,
         fontWeight: "bold",
-        color: "#333",
+        color: "#fff",
     },
     profileEmail: {
         fontSize: 16,
-        color: "#777",
+        color: "#ccc",
     },
     menu: {
         margin: 20,
-        backgroundColor: "#fff",
+        backgroundColor: "#222",
         borderRadius: 12,
         shadowColor: "#000",
-        shadowOpacity: 0.1,
+        shadowOpacity: 0.5,
         shadowRadius: 6,
         shadowOffset: { width: 0, height: 2 },
         elevation: 4,
@@ -169,14 +204,14 @@ const styles = StyleSheet.create({
         paddingVertical: 16,
         paddingHorizontal: 20,
         borderBottomWidth: 1,
-        borderBottomColor: "#eee",
+        borderBottomColor: "#333",
     },
     menuItemText: {
         fontSize: 18,
-        color: "#333",
+        color: "#fff",
         marginLeft: 16,
     },
     logoutButton: {
-        borderBottomWidth: 0, // Remove border for the last item
+        borderBottomWidth: 0, // No border for the last item
     },
 });

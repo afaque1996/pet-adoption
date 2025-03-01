@@ -12,7 +12,7 @@ export default function IndexRedirect() {
 
     useEffect(() => {
         if (mounted) {
-            router.replace("/home");
+            router.replace("/(tabs)/home");
         }
     }, [mounted]);
 

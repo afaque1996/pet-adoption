@@ -38,6 +38,5 @@ export const useAuth = () => {
     };
   }, []);
 
-  // Always return an object, even while loading.
   return { user, loading };
 };

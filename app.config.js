@@ -31,6 +31,9 @@ export default {
             "expo-router"
         ],
         extra: {
+            eas: {
+                "projectId": "bb99f5b6-0dad-431a-967a-6c46f4ef05fe"
+            },
             EXPO_PUBLIC_SUPABASE_URL: process.env.EXPO_PUBLIC_SUPABASE_URL,
             EXPO_PUBLIC_SUPABASE_ANON_KEY: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY
         }
